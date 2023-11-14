@@ -5,7 +5,9 @@
   "main": "app.ts",
   "scripts": {
     "build": "npx tsc",
-    "start": "node dist/index.js",
+    "start": "node dist/app.js",
+    "predebug": "npm run build",
+    "debug": "npm run start",
     "dev": "concurrently \"npx tsc --watch\" \"PORT=3000 nodemon -q ./dist/app.js\"",
     "test": "jest"
   },
