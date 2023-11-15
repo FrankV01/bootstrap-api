@@ -13,4 +13,4 @@ This is situated for now.
 
 # LICENSE
 
-MIT -> [LICENSE.md](./master/LICENSE.md)
+MIT -> [LICENSE.md](./LICENSE.md)
