@@ -1,18 +1,19 @@
 import request from 'supertest';
-import { app } from '../app';
+import { server } from '../app';
 
 describe('Test the root path', () => {
-  let server= app;
   
   test('It should response the GET method', async () => {
-    const response = await request(app).get('/');
+    const response = await request(server).get('/');
     expect(response.statusCode).toBe(200);
-    expect(response.text).toBe('⚡ Express + TypeScript Server');
+    expect(response.body).toBe('⚡ Restify + TypeScript Server');
   });
   
   
-  
+  //TODO: Properly tear down the server.
   afterAll(done => {
+    server.close()
+    done()
   });
   
 });

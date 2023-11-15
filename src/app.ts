@@ -1,17 +1,31 @@
-import express, { Express, Request, Response } from 'express';
+import restify, {Request, Response, Next} from 'restify'
 import dotenv from 'dotenv';
 
 dotenv.config();
 
-const app: Express = express();
+
 const port = process.env.PORT || "3000";
 
-app.get('/', (req: Request, res: Response) => {
-  res.send(`⚡ Express + TypeScript Server`);
-});
+function respond(req:Request, res: Response, next: Next) {
+  res.send(`⚡ Restify + TypeScript Server`);
+  next();
+}
+function respond_hello(req: Request, res: Response, next: Next) {
+  res.send('hello ' + req.params.name);
+  next();
+}
 
-app.listen(port, () => {
+const server = restify.createServer();
+server.get('/hello/:name', respond_hello);
+server.head('/hello/:name', respond_hello);
+
+server.get('/', respond);
+
+server.listen(port, () => {
   console.log(`⚡️[server]: Server is running at http://localhost:${port}`);
 });
 
-export {app}
+export {
+  server,
+  restify
+}
